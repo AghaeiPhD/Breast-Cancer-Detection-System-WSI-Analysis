@@ -17,6 +17,9 @@ Training an Attention-based Multiple Instance Learning (ABMIL) model on H-optimu
 | Min Epochs | 15 |
 | Cross-Validation Folds | 5 |
 | Train/Validation Split | 70% / 30% (Patient-Level) |
+| **Decision Threshold** | **0.35** |
+
+**Note on Decision Threshold:** The threshold of 0.35 (lower than the standard 0.50) was intentionally chosen to **maximize sensitivity (recall)** . In breast cancer screening, missing a malignant case (false negative) is clinically more harmful than a false positive. This conservative threshold achieves **high sensitivity (94.55%)** on the external test set, missing only 3 out of 55 malignant cases, at the cost of slightly lower precision (91.23%).
 
 ## Dataset Information
 | Item | Value |
