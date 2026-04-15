@@ -41,6 +41,35 @@ Step 4: ABMIL Classification → Slide-level diagnosis with attention heatmaps
 
 ---
 
+## Sample Attention Heatmaps
+
+The ABMIL model generates interpretable attention maps showing which regions influenced the diagnosis. **Red areas** indicate high model attention (suspected tumor), **blue areas** indicate low attention (normal tissue). Decision threshold is **0.35** (35%).
+
+| Type | True | Predicted | Probability | File |
+|:---|:---:|:---:|:---:|:---|
+| True Positive 1 | Malignant | Malignant | 100% | [View](heatmaps/tp_malignant_01.png) |
+| True Positive 2 | Malignant | Malignant | 100% | [View](heatmaps/tp_malignant_02.png) |
+| True Negative | Benign | Benign | 29.6% | [View](heatmaps/tn_benign_01.png) |
+| False Positive | Benign | Malignant | 91.7% | [View](heatmaps/fp_benign_wrong.png) |
+| False Negative | Malignant | Benign | 0% | [View](heatmaps/fn_malignant_missed.png) |
+
+### Interpretation
+
+| Sample | What It Shows |
+|:---|:---|
+| **True Positives (100%)** | Model correctly identified malignant regions with **very high confidence**. Attention maps highlight dense tumor areas. |
+| **True Negative (29.6%)** | Model correctly classified benign tissue with **low confidence** (below threshold). Attention is scattered, no clear tumor focus. |
+| **False Positive (91.7%)** | Model was **highly confident** but wrong. Likely mistook **inflammation or dense benign tissue** for tumor. This reveals a known limitation of the model. |
+| **False Negative (0%)** | Model had **zero confidence** in malignancy and predicted benign, but was wrong. This represents a **missed low-grade or subtle tumor** that the model failed to recognize. |
+
+### Key Takeaways
+
+- **Strengths:** Model is highly confident on clear malignant cases (TP=100%).
+- **Limitations:** May confuse inflammation with tumor (FP=91.7%). May miss subtle/low-grade tumors (FN=0%).
+- **Clinical Implication:** Model is **conservative** (threshold 0.35), prioritizing high sensitivity. False positives are acceptable in screening; false negatives are the main concern.
+
+---
+
 ## Documentation
 
 Detailed technical documentation for each step:
