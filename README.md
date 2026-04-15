@@ -9,13 +9,17 @@ A 4-step computational pathology pipeline for breast cancer detection from whole
 ---
 
 ## Pipeline Overview
+
+```
 Step 1: Pre-screening (MobileNetV2) → Filters empty regions (93.97% CV accuracy)
-↓
+    ↓
 Step 2: Grid Scanning (50×50) → Identifies 40 suspicious regions per slide
-↓
+    ↓
 Step 3: Feature Extraction (H-optimus-0) → 1,536-dim features from 200 patches/slide
-↓
+    ↓
 Step 4: ABMIL Classification → Slide-level diagnosis with attention heatmaps
+```
+
 ---
 
 ## Key Results
@@ -73,18 +77,23 @@ Detailed technical documentation for each step:
 ---
 
 ## Repository Structure
-Breast-Cancer-WSI-Results/
-├── README.md                    # Project overview
-├── LICENSE                      # MIT License
-├── docs/                        # Detailed documentation
+
+```
+Breast-Cancer-Detection-System-WSI-Analysis/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── docs/
 │   ├── step1.md
 │   ├── step2.md
 │   ├── step3.md
 │   ├── step4.md
 │   └── validation_external.md
-├── pdfs/                        # Full reports (PDF)
-├── results/                     # Metrics and plots
-└── heatmaps/                    # Attention visualization samples
+├── pdfs/
+├── results/
+└── heatmaps/
+```
+
 ---
 
 ## Author
@@ -98,6 +107,9 @@ Breast-Cancer-WSI-Results/
 ## Citation
 
 If you use this work, please cite:
+
+```
 Aghaei, F.P. (2026). Breast Cancer Detection System - WSI Analysis.
 A 4-step computational pathology pipeline using H-optimus-0 and ABMIL.
 GitHub: https://github.com/AghaeiPhD/Breast-Cancer-Detection-System-WSI-Analysis
+```
