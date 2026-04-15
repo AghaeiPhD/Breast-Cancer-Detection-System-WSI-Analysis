@@ -47,11 +47,11 @@ The ABMIL model generates interpretable attention maps showing which regions inf
 
 | Type | True | Predicted | Probability | File |
 |:---|:---:|:---:|:---:|:---|
-| True Positive 1 | Malignant | Malignant | 100% | [View](heatmaps/tp_malignant_01.png) |
-| True Positive 2 | Malignant | Malignant | 100% | [View](heatmaps/tp_malignant_02.png) |
-| True Negative | Benign | Benign | 29.6% | [View](heatmaps/tn_benign_01.png) |
-| False Positive | Benign | Malignant | 91.7% | [View](heatmaps/fp_benign_wrong.png) |
-| False Negative | Malignant | Benign | 0% | [View](heatmaps/fn_malignant_missed.png) |
+| True Positive 1 | Malignant | Malignant | 100% | [View](heatmaps/TP_malignant_1.png) |
+| True Positive 2 | Malignant | Malignant | 100% | [View](heatmaps/TP_malignant_2.png) |
+| True Negative | Benign | Benign | 29.6% | [View](heatmaps/TN_benign.png) |
+| False Positive | Benign | Malignant | 91.7% | [View](heatmaps/FP_benign_wrong.png) |
+| False Negative | Malignant | Benign | 0% | [View](heatmaps/FN_malignant_missed.png) |
 
 ### Interpretation
 
