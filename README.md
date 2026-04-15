@@ -69,7 +69,17 @@ The ABMIL model generates interpretable attention maps showing which regions inf
 - **Clinical Implication:** Model is **conservative** (threshold 0.35), prioritizing high sensitivity. False positives are acceptable in screening; false negatives are the main concern.
 
 ---
+### Cross-Project Consistency Analysis
 
+- **False Negatives:** 3 out of the 5 missed cases in this study were **also missed** by our subsequent [CellViT + Hybrid Pooling](https://github.com/AghaeiPhD/Breast-Cancer-CellViT-Hybrid-Pooling) pipeline.
+- **False Positives:** 4 out of the 5 false alarms in this study were **also misclassified** by the CellViT pipeline.
+- **Interpretation:** The high overlap in errors across two completely different architectures (ABMIL with Attention vs. CellViT with Hybrid Pooling) strongly suggests that these specific slides represent **inherently challenging cases**:
+  - The 3 consistently missed malignant slides likely contain **low-grade or diffuse tumors**.
+  - The 4 consistently misclassified benign slides likely contain **dense inflammation or atypical benign tissue**.
+- **Conclusion:** These errors are **data-centric** rather than model-centric. Addressing them would require **higher magnification scans** or **multi-resolution analysis**, not merely architectural changes.
+
+
+---
 ## Documentation
 
 Detailed technical documentation for each step:
