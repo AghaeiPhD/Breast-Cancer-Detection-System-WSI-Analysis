@@ -119,7 +119,6 @@ Breast-Cancer-Detection-System-WSI-Analysis/
 │   ├── step4.md
 │   └── validation_external.md
 ├── pdfs/
-├── results/
 └── heatmaps/
 ```
 
