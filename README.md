@@ -146,8 +146,6 @@ Breast-Cancer-Detection-System-WSI-Analysis/
 
 If you use this work, please cite:
 
-```
-Aghaei, F.P. (2026). Breast Cancer Detection System - WSI Analysis.
-A 4-step computational pathology pipeline using H-optimus-0 and ABMIL.
-GitHub: https://github.com/AghaeiPhD/Breast-Cancer-Detection-System-WSI-Analysis
-```
+Aghaei, F.P. (2026). **Breast Cancer Detection System - WSI Analysis.**  
+A 4-step computational pathology pipeline using H-optimus-0 and ABMIL.  
+GitHub: [https://github.com/AghaeiPhD/Breast-Cancer-Detection-System-WSI-Analysis](https://github.com/AghaeiPhD/Breast-Cancer-Detection-System-WSI-Analysis)
