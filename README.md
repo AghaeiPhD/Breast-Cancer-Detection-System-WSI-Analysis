@@ -8,6 +8,12 @@ A 4-step computational pathology pipeline for breast cancer detection from whole
 
 ---
 
+## Research Objective
+
+My long-term goal is to develop computational pathology models that extract interpretable nuclear and tissue-level features from whole slide images, enabling pathologists to make more accurate and standardized diagnostic decisions in histopathology.
+
+---
+
 ## Pipeline Overview
 
 ```
@@ -66,7 +72,8 @@ The ABMIL model generates interpretable attention maps showing which regions inf
 
 - **Strengths:** Model is highly confident on clear malignant cases (TP=100%).
 - **Limitations:** May confuse inflammation with tumor (FP=91.7%). May miss subtle/low-grade tumors (FN=0%).
-- **Clinical Implication:** Model is **conservative** (threshold 0.35), prioritizing high sensitivity. False positives are acceptable in screening; false negatives are the main concern.
+- **Clinical Implication:** Model is **conservative** (threshold 0.35), prioritizing high sensitivity. False positives are acceptable in screening; false negatives are the main concern.  
+This trade-off was intentional due to clinical preference for high sensitivity in cancer screening.
 
 ---
 ### Cross-Project Consistency Analysis
@@ -74,10 +81,38 @@ The ABMIL model generates interpretable attention maps showing which regions inf
 - **False Negatives:** 3 out of the 5 missed cases in this study were **also missed** by our subsequent [CellViT + Hybrid Pooling](https://github.com/AghaeiPhD/Breast-Cancer-CellViT-Hybrid-Pooling) pipeline.
 - **False Positives:** 4 out of the 5 false alarms in this study were **also misclassified** by the CellViT pipeline.
 - **Interpretation:** The high overlap in errors across two completely different architectures (ABMIL with Attention vs. CellViT with Hybrid Pooling) strongly suggests that these specific slides represent **inherently challenging cases**:
-  - The 3 consistently missed malignant slides likely contain **low-grade or diffuse tumors**.
-  - The 4 consistently misclassified benign slides likely contain **dense inflammation or atypical benign tissue**.
+- The 3 consistently missed malignant slides likely contain **low-grade or diffuse tumors**.  
+- The 4 consistently misclassified benign slides likely contain **dense inflammation or atypical benign tissue**.  
+  This suggests that these cases may be inherently challenging rather than model-specific.
 - **Conclusion:** These errors are **data-centric** rather than model-centric. Addressing them would require **higher magnification scans** or **multi-resolution analysis**, not merely architectural changes.
 
+
+---
+## Limitations & Data-Centric Insight
+
+Although slides have different MPP (microns-per-pixel) values, the pipeline operates on fixed-size patches without MPP normalization during preprocessing. This introduces scale inconsistency, as the same patch size may represent different physical tissue areas across slides.
+
+This limitation can affect model performance in the following cases:
+- Subtle or low-grade tumors that require higher spatial resolution
+- False positives in inflammatory or dense benign tissue regions due to limited contextual information
+
+Importantly, similar error patterns are observed across both the ABMIL-based pipeline and the CellViT-based transformer pipeline. This suggests that the observed failures are primarily **data-centric rather than model-specific**.
+
+Future improvements could include:
+- MPP normalization across slides
+- Multi-scale or multi-resolution feature learning
+- Incorporation of broader tissue context
+
+---
+
+## Model Architecture
+
+| Component | Specification |
+|:---|:---|
+| **Pre-screening** | MobileNetV2 (ImageNet pre-trained) |
+| **Feature Extractor** | H-optimus-0 (bioptimus/H-optimus-0) - 1,536 dimensions |
+| **MIL Aggregator** | Attention-based MIL (ABMIL) - 512 hidden dims, dropout 0.6 |
+| **Decision Threshold** | 0.35 (optimized for high recall) |
 
 ---
 ## Documentation
@@ -91,17 +126,6 @@ Detailed technical documentation for each step:
 | 3 | Feature Extraction (H-optimus-0) | [docs/step3.md](docs/step3.md) |
 | 4 | ABMIL Training & Clinical Interpretation | [docs/step4.md](docs/step4.md) |
 | ★ | External Validation (Camelyon - Few-shot) | [docs/validation_external.md](docs/validation_external.md) |
-
----
-
-## Model Architecture
-
-| Component | Specification |
-|:---|:---|
-| **Pre-screening** | MobileNetV2 (ImageNet pre-trained) |
-| **Feature Extractor** | H-optimus-0 (bioptimus/H-optimus-0) - 1,536 dimensions |
-| **MIL Aggregator** | Attention-based MIL (ABMIL) - 512 hidden dims, dropout 0.6 |
-| **Decision Threshold** | 0.35 (optimized for high recall) |
 
 ---
 
@@ -136,8 +160,9 @@ Breast-Cancer-Detection-System-WSI-Analysis/
 
 ## Author
 
-**F.P. Aghaei**
-- Project Date: March - April 2026
+**F.P. Aghaei**  
+Affiliation: Independent Researcher  
+- Project Date: March - April 2026  
 - License: MIT
 
 ---
